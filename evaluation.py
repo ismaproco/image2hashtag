@@ -1,11 +1,8 @@
-import matplotlib.pyplot as plt
-
 ### Import packages
 import torch
 import numpy as np
 from torch import nn, optim
 import torch.nn.functional as F
-import matplotlib.pyplot as plt
 from torchvision import  datasets, transforms, models
 from PIL import Image
 
@@ -15,8 +12,9 @@ def process_image(image):
     '''
     
     # TODO: Process a PIL image for use in a PyTorch model
-    img = Image.open( image )
-    img.load()
+    img_og = Image.open( image )
+    img_og.load()
+    img = img_og.convert('RGB')
     normalize = transforms.Normalize(
        mean=[0.485, 0.456, 0.406],
        std=[0.229, 0.224, 0.225]
@@ -78,7 +76,10 @@ def get_probs(img_path, model, device, classes):
     title = img_path
     img = Image.open(img_path)
     
-    probabilities = {}
+    probabilities = []
     for i,prob in enumerate(probs):
-        probabilities[classes[idx[i].item()]] = prob.item()
+        class_dict = {}
+        class_dict['name'] = classes[idx[i].item()]
+        class_dict['prob'] = prob.item()
+        probabilities.append(class_dict)
     return probabilities

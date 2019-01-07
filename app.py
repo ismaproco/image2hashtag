@@ -2,7 +2,7 @@ import os
 import base64
 from io import BytesIO
 
-from flask import Flask, make_response, request, render_template
+from flask import Flask, make_response, request, render_template, jsonify
 from flask_cors import CORS
 from werkzeug.exceptions import BadRequest
 import torch
@@ -40,12 +40,8 @@ def eval_image():
     input_buffer = BytesIO()
     output_buffer = BytesIO()
     input_file.save(input_buffer)
-    
-    
-    
-    img = evaluate_input(input_buffer)
-    response = evaluation.get_probs(input_buffer, model, device_to, class_names)
-    response.headers.set('Content-Type', 'application/json')
+
+    response = jsonify(evaluation.get_probs(input_buffer, model, device_to, class_names))
     return response
 
 
