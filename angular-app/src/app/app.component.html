@@ -1,0 +1,17 @@
+<input
+  style="display: none"
+  type="file" (change)="onFileChanged($event)"
+  #fileInput>
+<button (click)="fileInput.click()">Select File</button>
+<button (click)="onUpload()">Upload!</button>
+<div>
+  <ng-container *ngIf="selectedFile">
+      <img [src]="imageSrc" alt="" style="max-width:400px;">
+  </ng-container>
+</div>
+<div *ngIf="results?.length > 0">
+  <div *ngFor="let result of results">
+    #{{result.name}} ({{result.prob}})
+  </div>
+</div>
+
