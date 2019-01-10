@@ -5,8 +5,11 @@
 <button (click)="fileInput.click()">Select File</button>
 <button (click)="onUpload()">Upload!</button>
 <div>
-  <ng-container *ngIf="selectedFile">
+  <ng-container *ngIf="selectedFile && !loading">
       <img [src]="imageSrc" alt="" style="max-width:400px;">
+  </ng-container>
+  <ng-container *ngIf="loading">
+    Loaded: {{loading.loaded / loading.total * 100 | number:'1.2'}} %
   </ng-container>
 </div>
 <div *ngIf="results?.length > 0">

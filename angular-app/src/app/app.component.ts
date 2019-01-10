@@ -10,9 +10,10 @@ type NamedProb = {name:string, prob: number};
 export class AppComponent {
   title = 'angular-app';
   selectedFile: File;
-  url = 'http://localhost:5000/image'
+  url = 'https://venus.isma.xyz/image'
   imageSrc;
   results: NamedProb[];
+  loading:any;
 
   constructor(private http: HttpClient) {
 
@@ -31,11 +32,16 @@ export class AppComponent {
       reportProgress: true,
       observe: 'events',
     })
-      .subscribe(event => {
+      .subscribe((event:any) => {
+        if(event.type === 1) {
+          this.loading = event;
+        }
+
         console.log(event); // handle event here
         if(event instanceof HttpResponse) {
           this.results =  <NamedProb[]>event.body;
           this.results.sort((a,b) => b.prob - a.prob)
+          this.loading = null;
         }
       });
   }
