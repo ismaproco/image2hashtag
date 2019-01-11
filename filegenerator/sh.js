@@ -104,8 +104,8 @@ async function setSearchText(page, selector, searchText) {
   const urls = await getUrls(page);
   console.log('Dimensions:', dimensions, urls);
 
-  writeArrToFile(`${searchText}_valid.txt`, urls.slice(0,10));
-  writeArrToFile(`${searchText}.txt`, urls.slice(10,urls.length));
+  writeArrToFile(`../url_files/${searchText}_valid.txt`, urls.slice(0,10));
+  writeArrToFile(`../url_files/${searchText}.txt`, urls.slice(10,urls.length));
 
   await browser.close();
 })();
