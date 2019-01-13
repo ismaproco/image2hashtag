@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html * {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn {
+  background: #2980b9;
+  color: rgba($color: #fff, $alpha: 0.9);
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}

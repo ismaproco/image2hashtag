@@ -1,20 +1,46 @@
-<input
-  style="display: none"
-  type="file" (change)="onFileChanged($event)"
-  #fileInput>
-<button (click)="fileInput.click()">Select File</button>
-<button (click)="onUpload()">Upload!</button>
-<div>
-  <ng-container *ngIf="selectedFile && !loading">
-      <img [src]="imageSrc" alt="" style="max-width:400px;">
-  </ng-container>
-  <ng-container *ngIf="loading">
-    Loaded: {{loading.loaded / loading.total * 100 | number:'1.2'}} %
-  </ng-container>
-</div>
-<div *ngIf="results?.length > 0">
-  <div *ngFor="let result of results">
-    #{{result.name}} ({{result.prob}})
+<input style="display: none"
+       type="file"
+       (change)="onFileChanged(($event?.target?.files)[0])"
+       #fileInput />
+<div class="upload-wrapper">
+  <app-file-drop *ngIf="!selectedFile"
+                 (selectedFile)="onFileChanged($event)">
+    <div class="upload-logo">
+      <img src="assets/img/upload-cloud.svg"
+           alt="">
+    </div>
+    <div>Drag and drop your file</div>
+    <div>or</div>
+    <span class="browse btn"
+          (click)="fileInput.click()">Browse</span>
+  </app-file-drop>
+  <div *ngIf="imageSrc && !loadingComplete"
+       class="image-wrapper">
+    <img [src]="imageSrc"
+         alt=""
+         class="upload-image" />
+    <span class="upload btn"
+          *ngIf="!loading"
+          (click)="onUpload()">Upload!</span>
+    <ng-container *ngIf="loading">
+      Loaded: {{ (loading.loaded / loading.total) * 100 | number: '1.2' }} %
+    </ng-container>
   </div>
 </div>
-
+<div class="results-wrapper"
+     *ngIf="loadingComplete">
+  <img [src]="imageSrc"
+       alt=""
+       class="upload-image" />
+  <div *ngIf="results?.length > 0">
+    <div>
+      <span *ngFor="let result of results">
+        #{{result.name}}
+      </span>
+    </div>
+    <span class="reload btn"
+          (click)="reset()">
+      Try another ...
+    </span>
+  </div>
+</div>

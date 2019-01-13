@@ -1,0 +1,45 @@
+.upload-wrapper {
+  width: 80%;
+  margin: auto;
+  .upload-logo {
+    filter: invert(1) sepia(1) saturate(7) hue-rotate(100deg);
+    opacity: 0.5;
+    img {
+      width: 4rem;
+    }
+  }
+}
+
+.browse {
+  width: 174px;
+}
+
+.upload-image {
+  max-width: 300px;
+  margin: auto;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
+}
+
+.image-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  .upload.btn {
+    display: inline-block;
+    width: 300px;
+    margin: 1rem 0 0 0;
+  }
+}
+
+.results-wrapper {
+  display: flex;
+  width: 800px;
+  height: 250px;
+  margin: auto;
+  align-items: center;
+  > div {
+    display: flex;
+    flex-flow: column;
+  }
+}
