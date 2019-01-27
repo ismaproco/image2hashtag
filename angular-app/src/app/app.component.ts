@@ -10,7 +10,7 @@ type NamedProb = { name: string; prob: number };
 export class AppComponent {
   title = 'angular-app';
   selectedFile: File;
-  url = 'http://localhost:5000/image';
+  url = 'https://venus.isma.xyz/image';
   imageSrc;
   results: NamedProb[];
   loading: any;
