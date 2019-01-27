@@ -14,8 +14,7 @@ floyd run --cpu --data floydhub/datasets/colornet/1:colornet --mode serve --env 
 app = Flask(__name__)
 CORS(app)
 app.config['DEBUG'] = False
-class_names = ['autumn', 'beach', 'christmas', 'easter', 'fashion', 'friends', 
-                   'happy', 'landscape', 'love', 'mountains', 'nature', 'snow', 'summer', 'sunset']
+class_names = ['art', 'autumn', 'beach', 'blackandwhite', 'cars', 'christmas', 'computers', 'cute', 'dogs', 'easter', 'fashion', 'friends', 'girl', 'goats', 'gym', 'happy', 'horse', 'landscape', 'love', 'mountains', 'nature', 'selfie', 'snow', 'summer', 'sunset', 'travel', 'work']
 device_to = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = evaluation.load_checkpoint(device_to, class_names)
 
@@ -46,4 +45,4 @@ def eval_image():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', threaded=False)
+    app.run(host='0.0.0.0', port='5000',threaded=True)

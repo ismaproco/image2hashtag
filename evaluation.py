@@ -39,7 +39,7 @@ def predict(image_path, model, device='cpu'):
     return ps
 
 def load_base_model(device, classes):
-    model = models.resnet50(pretrained=True)
+    model = models.resnet152(pretrained=True)
 
     ## Freeze parameters so we don't backprop through them
     for param in model.parameters():
@@ -65,7 +65,7 @@ def load_base_model(device, classes):
 
 def load_checkpoint(device, classes):
     model = load_base_model(device, classes)
-    model.load_state_dict(torch.load('model_resnet_maxaccu_152_p99.pt', map_location=lambda storage, loc: storage))
+    model.load_state_dict(torch.load('image2hashtag_resnet152_p99.pt', map_location=lambda storage, loc: storage))
     return model
 
 def get_probs(img_path, model, device, classes):
