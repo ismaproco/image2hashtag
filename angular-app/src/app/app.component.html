@@ -1,5 +1,6 @@
 <input style="display: none"
        type="file"
+       accept="image/*"
        (change)="onFileChanged(($event?.target?.files)[0])"
        #fileInput />
 <div class="upload-wrapper">
@@ -15,23 +16,29 @@
           (click)="fileInput.click()">Browse</span>
   </app-file-drop>
   <div *ngIf="imageSrc && !loadingComplete"
-       class="image-wrapper">
-    <img [src]="imageSrc"
-         alt=""
-         class="upload-image" />
-    <span class="upload btn"
-          *ngIf="!loading"
-          (click)="onUpload()">Upload!</span>
-    <ng-container *ngIf="loading">
-      Loaded: {{ (loading.loaded / loading.total) * 100 | number: '1.2' }} %
-    </ng-container>
+       class="upload-progress-wrapper">
+    <div class="image-wrapper">
+      <img [src]="imageSrc"
+      alt=""
+      class="upload-image" />
+    </div>
+    <div>
+      <span class="upload btn"
+            *ngIf="!loading"
+            (click)="onUpload()">Upload!</span>
+      <ng-container *ngIf="loading">
+        Loaded: {{ (loading.loaded / loading.total) * 100 | number: '1.2' }} %
+      </ng-container>
+    </div>
   </div>
 </div>
 <div class="results-wrapper"
      *ngIf="loadingComplete">
-  <img [src]="imageSrc"
-       alt=""
-       class="upload-image" />
+  <div class="image-wrapper">
+    <img [src]="imageSrc"
+          alt=""
+          class="upload-image" />
+  </div>
   <div *ngIf="results?.length > 0">
     <div>
       <span *ngFor="let result of results">

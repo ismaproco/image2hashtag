@@ -16,11 +16,19 @@
 
 .upload-image {
   max-width: 300px;
-  margin: auto;
+  max-height: 300px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
 }
 
 .image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 310px;
+  height: 310px;
+}
+
+.upload-progress-wrapper {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -28,18 +36,19 @@
   .upload.btn {
     display: inline-block;
     width: 300px;
-    margin: 1rem 0 0 0;
   }
 }
 
 .results-wrapper {
   display: flex;
   width: 800px;
-  height: 250px;
+  height: 400px;
   margin: auto;
   align-items: center;
   > div {
     display: flex;
     flex-flow: column;
+    padding: 0 10px;
+    box-sizing: border-box;
   }
 }
