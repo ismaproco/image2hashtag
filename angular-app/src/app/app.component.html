@@ -1,4 +1,4 @@
-<input style="display: none"
+<input [hidden]="true"
        type="file"
        accept="image/*"
        (change)="onFileChanged(($event?.target?.files)[0])"
@@ -17,12 +17,9 @@
   </app-file-drop>
   <div *ngIf="imageSrc && !loadingComplete"
        class="upload-progress-wrapper">
-    <div class="image-wrapper">
-      <img [src]="imageSrc"
-      alt=""
-      class="upload-image" />
-    </div>
-    <div>
+    <app-image-wrapper [src]="imageSrc">
+    </app-image-wrapper>
+    <div class="upload-action">
       <span class="upload btn"
             *ngIf="!loading"
             (click)="onUpload()">Upload!</span>
@@ -34,20 +31,20 @@
 </div>
 <div class="results-wrapper"
      *ngIf="loadingComplete">
-  <div class="image-wrapper">
-    <img [src]="imageSrc"
-          alt=""
-          class="upload-image" />
-  </div>
-  <div *ngIf="results?.length > 0">
-    <div>
-      <span *ngFor="let result of results">
-        #{{result.name}}
-      </span>
-    </div>
+  <app-image-wrapper [src]="imageSrc">
+  </app-image-wrapper>
+  <div *ngIf="results?.length > 0"
+       class="results">
     <span class="reload btn"
           (click)="reset()">
       Try another ...
     </span>
+    <div class="tags-wrapper">
+      <span *ngFor="let result of results">
+        <ng-container *ngIf="result?.prob > 0.08">
+            #{{result.name}}
+        </ng-container>
+      </span>
+    </div>
   </div>
 </div>

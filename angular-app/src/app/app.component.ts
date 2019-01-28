@@ -28,6 +28,7 @@ export class AppComponent {
   }
 
   onUpload() {
+    this.loading = {};
     const imgTool = new ImageTools();
     imgTool
       .resize(this.selectedFile, { width: 640, height: 480 })
