@@ -19,9 +19,17 @@ import { Component, Input } from '@angular/core';
     }
 
     .upload-image {
-      max-width: 300px;
-      max-height: 300px;
+      max-width: 290px;
+      max-height: 290px;
       box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
+    }
+
+    @media only screen and (min-device-width : 768px) {
+      .upload-image {
+        max-width: 490px;
+        max-height: 490px;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 1);
+      }
     }
   `]
 })
