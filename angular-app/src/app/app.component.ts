@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpResponse,
+  HttpEventType,
+  HttpEvent,
+  HttpProgressEvent
+} from '@angular/common/http';
 import ImageTools from './image-tools';
 import { trigger, style, animate, transition } from '@angular/animations';
 
-interface NamedProb { name: string; prob: number }
+interface NamedProb {
+  name: string;
+  prob: number;
+}
 @Component({
   selector: 'app-root',
   animations: [
@@ -21,9 +30,9 @@ export class AppComponent {
   title = 'angular-app';
   selectedFile: File;
   url = 'https://venus.isma.xyz/image';
-  imageSrc;
+  imageSrc: string | ArrayBuffer;
   results: NamedProb[];
-  loading: any;
+  loading: HttpProgressEvent;
   loadingComplete = false;
 
   constructor(private http: HttpClient) {}
@@ -38,7 +47,7 @@ export class AppComponent {
   }
 
   onUpload() {
-    this.loading = {};
+    this.loading = { type: 0, loaded: 0, total: 100 };
     const imgTool = new ImageTools();
     imgTool
       .resize(this.selectedFile, { width: 640, height: 480 })
@@ -53,9 +62,14 @@ export class AppComponent {
         reportProgress: true,
         observe: 'events'
       })
-      .subscribe((event: any) => {
-        if (event.type === 1) {
-          this.loading = event;
+      .subscribe((event: HttpEvent<NamedProb[]>) => {
+        console.log(event);
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            this.loading = event;
+            break;
+          default:
+            break;
         }
 
         if (event instanceof HttpResponse) {
