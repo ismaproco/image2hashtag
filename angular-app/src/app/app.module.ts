@@ -6,11 +6,12 @@ import { FileDropModule } from 'ngx-file-drop';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileDropComponent } from './file-drop/file-drop.component';
 import { ImageWrapperComponent } from './image-wrapper.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent, FileDropComponent, ImageWrapperComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

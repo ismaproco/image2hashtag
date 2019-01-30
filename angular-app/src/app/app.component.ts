@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import ImageTools from './image-tools';
-type NamedProb = { name: string; prob: number };
+import { trigger, style, animate, transition } from '@angular/animations';
+
+interface NamedProb { name: string; prob: number }
 @Component({
   selector: 'app-root',
+  animations: [
+    trigger('enterAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateY(300px)', opacity: 0 }),
+        animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
+      ])
+    ])
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'angular-app';
@@ -41,7 +51,7 @@ export class AppComponent {
     this.http
       .post(this.url, uploadData, {
         reportProgress: true,
-        observe: 'events',
+        observe: 'events'
       })
       .subscribe((event: any) => {
         if (event.type === 1) {
@@ -64,5 +74,4 @@ export class AppComponent {
     this.loading = null;
     this.loadingComplete = false;
   }
-
 }
