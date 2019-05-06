@@ -1,0 +1,12 @@
+[Unit]
+Description=uWSGI instance to serve myproject
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/image2hashtag
+ExecStart=/home/ubuntu/.local/bin/uwsgi --ini image2hashtag.ini
+
+[Install]
+WantedBy=multi-user.target
